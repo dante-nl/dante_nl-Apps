@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>QR It! &mdash; dante_nl Apps</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://apps.dantenl.tk/qrit/style.css" />
+	<link rel="apple-touch-icon" sizes="180x180" href="https://apps.dantenl.tk/qrit/i/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://apps.dantenl.tk/qrit/i/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://apps.dantenl.tk/qrit/i/favicon-16x16.png">
+	<meta name="og:author" content="dante_nl Apps">
+	<meta property="og:title" content="QR It! URL" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="https://apps.dantenl.tk/qrit/i/QR%20It.jpg" />
+	<meta property="og:description" content="URL that is opened via a QR It! QR code." />
+	<meta property="theme-color" content="#ffffff" />
+	<script>
+		
+			function getDomain(url, subdomain) {
+				subdomain = subdomain || false;
+
+				url = url.replace(/(https?:\/\/)?(www.)?/i, '');
+
+				if (!subdomain) {
+					url = url.split('.');
+
+					url = url.slice(url.length - 2).join('.');
+				}
+
+				if (url.indexOf('/') !== -1) {
+					return url.split('/')[0];
+				}
+
+				return url;
+			}
+
+		function is_url(str) {
+			regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+			if (regexp.test(str)) {
+				return "yes";
+			}
+			else {
+				return "no";
+			}
+		}
+	</script>
+</head>
+
+<body>
+
+	<h1>Hey!</h1>
+	<h2 id="alert">Something went wrong!</h2>
+	<p id="continuebutton">Are you sure that JavaScript is on?</p>
+	<script>
+		var queryString = new URLSearchParams(window.location.search);
+		var url = queryString.get('url');
+		if(is_url="no") {
+			window.location.replace("http://apps.dantenl.tk/qrit/");
+		}
+		if(url) {
+			var QRL = getDomain(url)
+			document.getElementById('alert').innerHTML = `${QRL} is not verified by QR It and might be dangerous. If you are the owner of ${QRL}, you can contact me via <a href="mailto:dante_nl@icloud.com?subject=Contact QR It!" style="color:white;">via e-mail</a>.`
+			document.getElementById('continuebutton').innerHTML = `<a href="${url}" class="button">Continue to ${QRL}</a>`
+		} else {
+			window.location.replace("http://apps.dantenl.tk/qrit/");
+		}
+	</script>
+</body>
+
+</html>
