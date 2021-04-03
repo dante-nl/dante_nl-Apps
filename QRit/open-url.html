@@ -55,7 +55,7 @@
 	<script>
 		var queryString = new URLSearchParams(window.location.search);
 		var url = queryString.get('url');
-		if(is_url="no") {
+		if(is_url(url)="no") {
 			window.location.replace("http://apps.dantenl.tk/qrit/");
 		}
 		if(url) {
