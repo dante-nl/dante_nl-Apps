@@ -83,6 +83,8 @@
 				console.log(QRL)
 				document.getElementById("error").innerHTML = ''
 				document.getElementById("qrcode").innerHTML = ''
+				document.getElementById("note").innerHTML = '<p style="color: #4cd964;"><strong>This URL is verified.</strong> This URL has been verified and is proven to not do any harm. The user will not get any alert.</p>'
+				if(vURLs.indexOf(QRL)>-1) {
 					new QRCode(document.getElementById("qrcode"), {
 						text: QRL1,
 						width: 200,
@@ -91,8 +93,21 @@
 						colorLight: "#ffffff",
 						correctLevel: QRCode.CorrectLevel.H
 					});
-				
-			}
+				} else {
+					var QRL = getDomain(QRL1)
+					console.log(QRL)
+					document.getElementById("error").innerHTML = ''
+					document.getElementById("qrcode").innerHTML = ''
+					document.getElementById("note").innerHTML = '<p style="color: #ff9500;"><strong>This URL is not verified.</strong> This URL has not been verified. The user will get an alert. If you are the owner of this website, please contact me <a href="mailto:dante_nl@icloud.com?subject=Contact QR It!" style="color:#ff9500;">via e-mail</a></p>'
+					new QRCode(document.getElementById("qrcode"), {
+						text: `https://apps.dantenl.tk/qrit/open-url?url=${QRL1}`,
+						width: 200,
+						height: 200,
+						colorDark: "#000000",
+						colorLight: "#ffffff",
+						correctLevel: QRCode.CorrectLevel.H
+					});
+				}
 		}
 	</script>
 </body>
